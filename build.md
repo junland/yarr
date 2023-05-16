@@ -26,7 +26,7 @@ The instructions below are to cross-compile *yarr* to `Linux/ARM*`.
 
 Build:
 
-    docker build -t yarr.arm -f dockerfile.arm .
+    docker build -t yarr.arm -f Dockerfile.arm .
 
 Test:
 

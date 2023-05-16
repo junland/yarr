@@ -1,8 +1,11 @@
 name: build
 
 on:
+  workflow_dispatch:
   push:
-    tags: ['v*', 'test*']
+    branches: [ master, main, develop, dev ]
+  pull_request:
+    branches: [ master, main, develop, dev ]
 
 jobs:
   build_macos:

@@ -1,8 +1,10 @@
-name: build
+name: Build
 
 on:
   push:
-    tags: ['v*', 'test*']
+    branches: [ master, main, develop, dev ]
+  pull_request:
+    branches: [ master, main, develop, dev ]
 
 jobs:
   build_macos:
@@ -85,41 +87,3 @@ jobs:
       with:
         name: linux
         path: _output/linux/yarr
-
-  create_release:
-    # Create release with GitHub CLI
-    name: Create Release
-    runs-on: ubuntu-latest
-    if: ${{ !contains(github.ref, 'test') }}
-    needs: [build_macos, build_windows, build_linux]
-    steps:
-    - name: Create Release
-      run: gh release create ${{ github.ref }} --title ${{ github.ref }} --target ${{ github.ref }} --draft --prerelease
-      id: create_release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Download Artifacts
-      uses: actions/download-artifact@v3
-      with:
-        path: .
-    - name: Preparation
-      run: |
-        ls -R
-        chmod u+x macos/Contents/MacOS/yarr
-        chmod u+x linux/yarr
-
-        mv macos yarr.app     && zip -r yarr-macos.zip yarr.app
-        mv windows/yarr.exe . && zip yarr-windows.zip yarr.exe
-        mv linux/yarr .       && zip yarr-linux.zip yarr
-    - name: Upload MacOS
-      run: gh release upload ${{ github.ref }} --clobber ./yarr-macos.zip#yarr-${{ github.ref }}-macos64-amd64.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Upload Windows
-      run: gh release upload ${{ github.ref }} --clobber ./yarr-windows.zip#yarr-${{ github.ref }}-windows-amd64.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Upload Linux
-      run: gh release upload ${{ github.ref }} --clobber ./yarr-linux.zip#yarr-${{ github.ref }}-linux-amd64.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

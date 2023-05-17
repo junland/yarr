@@ -14,7 +14,7 @@ import (
 	"golang.org/x/sys/windows"
 )
 
-const iconFilePath = "example/icon/iconwin.ico"
+const iconFilePath = "icon-test.ico"
 
 func TestBaseWindowsTray(t *testing.T) {
 	systrayReady = func() {}

@@ -26,7 +26,7 @@ func TestStatic(t *testing.T) {
 }
 
 func TestStaticWithBase(t *testing.T) {
-	handler := NewServer(nil, "127.0.0.1:8000", "test").handler()
+	server := NewServer(nil, "127.0.0.1:8000", "test")
 	server.BasePath = "/sub"
 
 	handler := server.handler()
@@ -35,7 +35,7 @@ func TestStaticWithBase(t *testing.T) {
 	recorder := httptest.NewRecorder()
 	request := httptest.NewRequest("GET", url, nil)
 	handler.ServeHTTP(recorder, request)
-	if recorder.Result().StatusCode != 200 {
+	if recorder.Result().StatusCode != http.StatusOK {
 		t.FailNow()
 	}
 }

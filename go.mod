@@ -9,3 +9,5 @@ require (
 )
 
 require golang.org/x/text v0.8.0 // indirect
+
+replace github.com/nkanaev/yarr => ./yarr/src

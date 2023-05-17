@@ -4,12 +4,12 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"html/template"
 	"io"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
-	"html/template"
 
 	"github.com/nkanaev/yarr/src/platform"
 	"github.com/nkanaev/yarr/src/server"

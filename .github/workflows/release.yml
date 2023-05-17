@@ -1,8 +1,8 @@
-name: Build & Release
+name: Test, Build, & Release
 
 on:
   push:
-    tags: ['v*', 'v*.*', 'v*.*.*']
+    tags: ['v*.*', 'v*.*.*']
 
 jobs:
   build_macos:
@@ -26,6 +26,8 @@ jobs:
         key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
         restore-keys: |
           ${{ runner.os }}-go-
+    - name: "Test"
+      run: make test
     - name: "Build"
       run: make build_macos
     - name: Upload
@@ -55,6 +57,8 @@ jobs:
         key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
         restore-keys: |
           ${{ runner.os }}-go-
+    - name: "Test"
+      run: make test
     - name: "Build"
       run: make build_windows
     - name: Upload
@@ -84,6 +88,8 @@ jobs:
         key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
         restore-keys: |
           ${{ runner.os }}-go-
+    - name: "Test"
+      run: make test
     - name: "Build"
       run: make build_linux
     - name: Upload
@@ -118,7 +124,7 @@ jobs:
         mv windows/yarr.exe . && zip yarr-windows.zip yarr.exe
         mv linux/yarr .       && zip yarr-linux.zip yarr
     - name: Upload MacOS
-      run: gh release upload ${{ github.ref }} --clobber ./yarr-macos.zip#yarr-${{ github.ref }}-macos64-amd64.zip
+      run: gh release upload ${{ github.ref }} --clobber ./yarr-macos.zip#yarr-${{ github.ref }}-macos-amd64.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload Windows

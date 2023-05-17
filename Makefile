@@ -32,8 +32,8 @@ clean:
 deps:
 	go mod download
 
-serve:
+serve: deps
 	go run -tags "sqlite_foreign_keys" src/main.go -db local.db
 
-test:
+test: deps
 	cd src && go test -tags "sqlite_foreign_keys release" ./...

@@ -1,4 +1,4 @@
-name: Build
+name: Test & Build
 
 on:
   workflow_dispatch:
@@ -29,6 +29,8 @@ jobs:
         key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
         restore-keys: |
           ${{ runner.os }}-go-
+    - name: "Test"
+      run: make test
     - name: "Build"
       run: make build_macos
     - name: Upload
@@ -58,6 +60,8 @@ jobs:
         key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
         restore-keys: |
           ${{ runner.os }}-go-
+    - name: "Test"
+      run: make test
     - name: "Build"
       run: make build_windows
     - name: Upload
@@ -87,6 +91,8 @@ jobs:
         key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
         restore-keys: |
           ${{ runner.os }}-go-
+    - name: "Test"
+      run: make test
     - name: "Build"
       run: make build_linux
     - name: Upload

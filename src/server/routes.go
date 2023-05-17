@@ -34,7 +34,7 @@ func (s *Server) handler() http.Handler {
 			Username: s.Username,
 			Password: s.Password,
 			Public:   "/static",
-			Title:	s.Title,
+			Title:    s.Title,
 		}
 		r.Use(a.Handler)
 	}

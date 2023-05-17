@@ -37,3 +37,6 @@ serve: deps
 
 test: deps
 	cd src && go test -tags "sqlite_foreign_keys release" ./...
+
+fmt:
+	cd src && go fmt ./...

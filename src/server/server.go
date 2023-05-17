@@ -21,7 +21,7 @@ type Server struct {
 	// auth
 	Username string
 	Password string
-	
+
 	// https
 	CertFile string
 	KeyFile  string

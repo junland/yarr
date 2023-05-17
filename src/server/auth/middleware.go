@@ -48,7 +48,7 @@ func (m *Middleware) Handler(c *router.Context) {
 			c.HTML(http.StatusOK, assets.Template("login.html"), map[string]string{
 				"username": username,
 				"error":    "Invalid username/password",
-				"title": m.Title + " - Login",
+				"title":    m.Title + " - Login",
 			})
 			return
 		}

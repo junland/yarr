@@ -1,6 +1,6 @@
 VERSION := 2.3
 GITHASH := $(shell git rev-parse --short=8 HEAD)
-OUTPUT_DIR := _output/
+OUTPUT_DIR := _output
 
 CGO_ENABLED := 1
 GO_LDFLAGS  := -s -w

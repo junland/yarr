@@ -40,7 +40,7 @@ func TestBaseWindowsTray(t *testing.T) {
 	}
 
 	if err := wt.setTooltip("Cyrillic tooltip тест:)"); err != nil {
-		t.Errorf("SetIcon failed: %s", err)
+		t.Errorf("setTooltip failed: %s", err)
 	}
 
 	var id uint32 = 0

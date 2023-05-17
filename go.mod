@@ -1,6 +1,6 @@
 module github.com/nkanaev/yarr
 
-go 1.16
+go 1.17
 
 require (
 	github.com/mattn/go-sqlite3 v1.14.7

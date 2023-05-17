@@ -74,7 +74,7 @@ func main() {
 	flag.BoolVar(&open, "open", false, "open the server in browser")
 	flag.Parse()
 
-	# Sanitize title as its used in the template.
+	// Sanitize title as its used in the template.
 	title = template.HTMLEscapeString(title)
 
 	if ver {

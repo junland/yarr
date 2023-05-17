@@ -14,7 +14,7 @@ import (
 )
 
 func TestStatic(t *testing.T) {
-	handler := NewServer(nil, "127.0.0.1:8000").handler()
+	handler := NewServer(nil, "127.0.0.1:8000", "test").handler()
 	url := "/static/javascripts/app.js"
 
 	recorder := httptest.NewRecorder()
@@ -26,7 +26,7 @@ func TestStatic(t *testing.T) {
 }
 
 func TestStaticWithBase(t *testing.T) {
-	server := NewServer(nil, "127.0.0.1:8000")
+	handler := NewServer(nil, "127.0.0.1:8000", "test").handler()
 	server.BasePath = "/sub"
 
 	handler := server.handler()
@@ -41,7 +41,7 @@ func TestStaticWithBase(t *testing.T) {
 }
 
 func TestStaticBanTemplates(t *testing.T) {
-	handler := NewServer(nil, "127.0.0.1:8000").handler()
+	handler := NewServer(nil, "127.0.0.1:8000", "test").handler()
 	url := "/static/login.html"
 
 	recorder := httptest.NewRecorder()
@@ -56,7 +56,7 @@ func TestIndexGzipped(t *testing.T) {
 	log.SetOutput(io.Discard)
 	db, _ := storage.New(":memory:")
 	log.SetOutput(os.Stderr)
-	handler := NewServer(db, "127.0.0.1:8000").handler()
+	handler := NewServer(db, "127.0.0.1:8000", "test").handler()
 	url := "/"
 
 	recorder := httptest.NewRecorder()
@@ -87,7 +87,7 @@ func TestFeedIcons(t *testing.T) {
 	url := fmt.Sprintf("/api/feeds/%d/icon", feed.Id)
 	request := httptest.NewRequest("GET", url, nil)
 
-	handler := NewServer(db, "127.0.0.1:8000").handler()
+	handler := NewServer(db, "127.0.0.1:8000", "test").handler()
 	handler.ServeHTTP(recorder, request)
 	response := recorder.Result()
 

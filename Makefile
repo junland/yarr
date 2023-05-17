@@ -30,7 +30,7 @@ clean:
 	rm -rf _output
 
 deps:
-	go mod vendor
+	go mod download
 
 serve:
 	go run -tags "sqlite_foreign_keys" src/main.go -db local.db

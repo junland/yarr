@@ -105,8 +105,12 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     needs: [build_macos, build_windows, build_linux]
     steps:
+    - name: "Checkout"
+      uses: actions/checkout@v3
+      with:
+        submodules: 'recursive'
     - name: Create Release
-      run: gh release create ${{ github.ref }} --title ${{ github.ref }} --target ${{ github.ref }} --draft --prerelease
+      run: gh release create ${{ github.ref }} --title "Workflow - ${{ github.ref }}" --draft --prerelease
       id: create_release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

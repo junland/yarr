@@ -110,7 +110,7 @@ jobs:
       with:
         submodules: 'recursive'
     - name: Create Release
-      run: gh release create ${{ github.ref }} --title "Workflow - ${{ github.ref }}" --draft --prerelease
+      run: gh release create ${{ github.ref_name }} --title "Workflow - ${{ github.ref }}" --draft --prerelease
       id: create_release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
